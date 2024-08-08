@@ -1,4 +1,4 @@
-package singleton;
+package practice;
 
 class Parent {
     public Parent() {
@@ -28,6 +28,7 @@ public class Soojebi{
         Child c = new Child();
         c.fn();
         c.fnA();
+
     }
 
 }

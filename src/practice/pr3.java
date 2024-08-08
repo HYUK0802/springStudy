@@ -1,4 +1,4 @@
-package singleton;
+package practice;
 
 public class pr3 {
     public static void main(String[] args) {
@@ -11,5 +11,6 @@ public class pr3 {
             }
         }
         System.out.println(i + " " + j);
+        System.out.println(10 % 1);
     }
 }
