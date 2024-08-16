@@ -1,5 +1,6 @@
 import adapter.*;
 import aop.AopBrowser;
+import decorator.*;
 import proxy.Browser;
 import proxy.BrowserProxy;
 import proxy.IBrowser;
@@ -43,24 +44,38 @@ public class Main {
 //        browser.show();
 //        browser.show();
 
-        AtomicLong start = new AtomicLong();
-        AtomicLong end = new AtomicLong();
+//        AtomicLong start = new AtomicLong();
+//        AtomicLong end = new AtomicLong();
+//
+//        IBrowser aopBrowser = new AopBrowser("www.naver.com",
+//                ()->{
+//            System.out.println("before");
+//                    start.set(System.currentTimeMillis());
+//                },
+//                ()->{
+//            long now = System.currentTimeMillis();
+//                    end.set(now - start.get());
+//        }
+//                );
+//        aopBrowser.show();
+//        System.out.println("loading time : " + end.get());
+//        aopBrowser.show();
+//        System.out.println("loading time : " + end.get());
+        ICar audi = new Audi(1000);
+        audi.showPrice();
+        //a3
+        ICar audi3 = new A3(audi, "A3");
+        audi3.showPrice();
+        //a4
+        ICar audi4 = new A4(audi, "A4");
+        audi4.showPrice();
+        //a5
+        ICar audi5 = new A5(audi, "A5");
+        audi5.showPrice();
 
-        IBrowser aopBrowser = new AopBrowser("www.naver.com",
-                ()->{
-            System.out.println("before");
-                    start.set(System.currentTimeMillis());
-                },
-                ()->{
-            long now = System.currentTimeMillis();
-                    end.set(now - start.get());
-        }
-                );
-        aopBrowser.show();
-        System.out.println("loading time : " + end.get());
-        aopBrowser.show();
-        System.out.println("loading time : " + end.get());
     }
+
+
 
     //콘센트
     public static void connect(Electronic110V electronic110V) {
