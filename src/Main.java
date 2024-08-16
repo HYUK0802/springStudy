@@ -1,30 +1,65 @@
 import adapter.*;
+import aop.AopBrowser;
+import proxy.Browser;
+import proxy.BrowserProxy;
+import proxy.IBrowser;
 import singleton.AClass;
 import singleton.BClass;
 import singleton.SocketClient;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public class Main {
     public static void main(String[] args) {
-//        AClass aClass = new AClass();
-//        BClass bClass = new BClass();
+////        AClass aClass = new AClass();
+////        BClass bClass = new BClass();
+////
+////        SocketClient aClient = aClass.getSocketClient();
+////        SocketClient bClient = bClass.getSocketClient();
+////
+////        System.out.println("두개의 객체가 동일한가?");
+////        System.out.println(aClient.equals(bClient));
 //
-//        SocketClient aClient = aClass.getSocketClient();
-//        SocketClient bClient = bClass.getSocketClient();
+//        HairDryer hairDryer = new HairDryer();
+//        connect(hairDryer);
 //
-//        System.out.println("두개의 객체가 동일한가?");
-//        System.out.println(aClient.equals(bClient));
+//        Cleaner cleaner = new Cleaner();
+//
+//        Electronic110V adapter = new SocketAdapter(cleaner);
+//        connect(adapter);
+//
+//        AirConditioner airConditioner = new AirConditioner();
+//        Electronic110V airAdapter = new SocketAdapter(airConditioner);
+//        connect(airAdapter);
 
-        HairDryer hairDryer = new HairDryer();
-        connect(hairDryer);
+//        Browser browser = new Browser("www.naver.com");
+//        browser.show();
+//        browser.show();
+//        browser.show();
+//        IBrowser browser = new BrowserProxy("www.naver.com");
+//        browser.show();
+//        browser.show();
+//        browser.show();
+//        browser.show();
+//        browser.show();
 
-        Cleaner cleaner = new Cleaner();
+        AtomicLong start = new AtomicLong();
+        AtomicLong end = new AtomicLong();
 
-        Electronic110V adapter = new SocketAdapter(cleaner);
-        connect(adapter);
-
-        AirConditioner airConditioner = new AirConditioner();
-        Electronic110V airAdapter = new SocketAdapter(airConditioner);
-        connect(airAdapter);
+        IBrowser aopBrowser = new AopBrowser("www.naver.com",
+                ()->{
+            System.out.println("before");
+                    start.set(System.currentTimeMillis());
+                },
+                ()->{
+            long now = System.currentTimeMillis();
+                    end.set(now - start.get());
+        }
+                );
+        aopBrowser.show();
+        System.out.println("loading time : " + end.get());
+        aopBrowser.show();
+        System.out.println("loading time : " + end.get());
     }
 
     //콘센트
